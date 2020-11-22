@@ -24,6 +24,18 @@ a:hover{
 .bg-light{
     background-color: var(--blanco) !important;
 }
+.btn-primary{
+    background-color: var(--primary) !important;
+}
+.btn-primary:hover{
+    background-color: var(--primary) !important;
+}
+.btn{
+    border: 0 !important;
+}
+.bg-mix{
+    background: linear-gradient(180deg, var(--blanco) 50%, var(--gris)0);
+}
 /* *************************************************************************** */
 
 #sidebar-container{
@@ -40,4 +52,13 @@ a:hover{
 }
 .avatar{
     max-width: 35px;
+}
+
+#content{
+    overflow-y: hidden;
+    height: 100vh;
+    padding-bottom: 5rem;
+}
+.stat{
+    border-right: 1px solid var(--gris);
 }
