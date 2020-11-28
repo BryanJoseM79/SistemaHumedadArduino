@@ -1,3 +1,8 @@
+#include <WiFi.h>
+#include <WiFiClient.h>
+#include <WiFiServer.h>
+#include <WiFiUdp.h>
+
 byte server[] = { 192,168,0,103}; 
 int numero=23;
 #include <SPI.h>

@@ -9,7 +9,7 @@ date_default_timezone_set("America/Santiago");
   //$var1 = $_GET['var1'];
 
 //creamos la conexion a la bd
-  $conexion = mysqli_connect('localhost','root','','cyb');
+  $conexion = mysqli_connect('localhost','root','','grupo4_vespertino');
 
 //hacemos la consulta a la bd
 
