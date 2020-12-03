@@ -1,3 +1,9 @@
+<?php
+include("conexion.php");
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -140,7 +146,55 @@
                     </div>
                   </div>
               </section>
+            
 <!-- FIN DE ESTADISTICAS -->
+<section>
+  <div class="container"> 
+  <div class="col-md-12">
+    <table class="table table-hover ">
+      <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Temperatura</th>
+          <th scope="col">Humedad</th>
+          <th scope="col">Fecha</th>
+          <th scope="col">Hora</th>
+          <th scope="col">Editar</th>
+          <th scope="col">Eliminar</th>
+        </tr>
+
+        <?php
+         $query = mysqli_query($conexion,"SELECT d.id, d.temperatura, d.humedad, d.fecha, d.hora 
+         FROM `datos` AS d");
+        
+        $result = mysqli_num_rows($query);
+        if($result > 0){
+
+          while ($data = mysqli_fetch_array($query)){
+
+
+         ?>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row"><?php echo $data["id"]; ?></th>
+          <td><?php echo $data["temperatura"];?></td>
+          <td><?php echo $data["humedad"]; ?></td>
+          <td><?php echo $data["fecha"]; ?></td>
+          <td><?php echo $data["hora"]; ?></td>
+          
+      </tr>
+
+    <?php
+    }
+  }
+  ?>
+      </tbody>
+    </table>
+        </div>
+      </div>
+</section>
+
           </div>
     </div>
 <!-- FIN del navbar superior -->
