@@ -155,16 +155,15 @@ include("conexion.php");
       <thead>
         <tr>
           <th scope="col">ID</th>
-          <th scope="col">Temperatura</th>
-          <th scope="col">Humedad</th>
           <th scope="col">Fecha</th>
           <th scope="col">Hora</th>
+          <th scope="col">var1</th>
           <th scope="col">Editar</th>
           <th scope="col">Eliminar</th>
         </tr>
 
         <?php
-         $query = mysqli_query($conexion,"SELECT d.id, d.temperatura, d.humedad, d.fecha, d.hora 
+         $query = mysqli_query($conexion,"SELECT d.id, d.fecha, d.hora, d.var1
          FROM `datos` AS d");
         
         $result = mysqli_num_rows($query);
@@ -178,10 +177,9 @@ include("conexion.php");
       <tbody>
         <tr>
           <th scope="row"><?php echo $data["id"]; ?></th>
-          <td><?php echo $data["temperatura"];?></td>
-          <td><?php echo $data["humedad"]; ?></td>
           <td><?php echo $data["fecha"]; ?></td>
           <td><?php echo $data["hora"]; ?></td>
+          <td><?php echo $data["var1"]; ?></td>
           
       </tr>
 

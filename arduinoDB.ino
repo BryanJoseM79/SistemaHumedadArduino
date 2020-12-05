@@ -3,7 +3,7 @@
 #include <WiFiServer.h>
 #include <WiFiUdp.h>
 
-byte server[] = { 192,168,0,128}; 
+byte server[] = { 192,168,0,103}; 
 int numero=23;
 #include <SPI.h>
 #include <WiFiNINA.h>
@@ -47,7 +47,7 @@ if (client.connect(server, 80)>0) {
      Serial.println("Conexion Establecida con el Servidor");  //Conexion con el servidor
            Serial.print("Almacenando en Servidor: Dato: "); 
            Serial.println(numero);
-           client.print("GET http://192.168.0.128/grupo_4_vespertino/conexion.php?var1=");
+           client.print("GET http://192.168.0.103/directorio1/conexion.php?var1=");
            client.print(numero);
            client.println(" HTTP/1.0");
            client.println("User-Agent: Arduino 1.0");
