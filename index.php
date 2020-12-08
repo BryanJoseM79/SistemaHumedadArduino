@@ -93,21 +93,7 @@ include("conexion.php");
 
 <!-- Comienzo de estadisticas abajo del texto de bienvenida al administrador-->
               <section class="bg-mix">
-                  <div class="container">
-                    <div class="card rounded-0">
-                        <div class="card-body">
-                            <div class="row">
-                              <div class="col-lg-3 stat my-3 d-flex">
-                                <div class="mx-auto">
-                                  <h6 class="text-muted">ALGUN DATO</h6>
-                                  <h3 class="font-weight-bold">34234234</h3>
-                                  <h6 class="text-success">
-                                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-caret-up-square-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                      <path fill-rule="evenodd" d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm4 9a.5.5 0 0 1-.374-.832l4-4.5a.5.5 0 0 1 .748 0l4 4.5A.5.5 0 0 1 12 11H4z"/>
-                                    </svg>
-                                    50.50%</h6>
-                                </div>
-                              </div>
+                  
                               <div class="col-lg-3 stat my-3 d-flex">
                                 <div class="mx-auto">
                                 <h6 class="text-muted">ALGUN DATO</h6>
@@ -158,8 +144,7 @@ include("conexion.php");
           <th scope="col">Fecha</th>
           <th scope="col">Hora</th>
           <th scope="col">var1</th>
-          <th scope="col">Editar</th>
-          <th scope="col">Eliminar</th>
+         
         </tr>
 
         <?php
