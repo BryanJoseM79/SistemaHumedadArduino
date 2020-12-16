@@ -1,5 +1,15 @@
 byte server[] = { 192,168,0,128}; 
-int numero=23;
+#include <DHT.h>
+ 
+// Definimos el pin digital donde se conecta el sensor
+#define DHTPIN 2
+// Dependiendo del tipo de sensor
+#define DHTTYPE DHT11
+
+int humedad = 0;
+ 
+// Inicializamos el sensor DHT11
+DHT dht(DHTPIN, DHTTYPE);
 #include <SPI.h>
 #include <WiFiNINA.h>
 #include "arduino_secrets.h" 
@@ -13,6 +23,10 @@ WiFiClient client;
 void setup() {
   //Initialize serial and wait for port to open:
   Serial.begin(9600);
+
+  // Comenzamos el sensor DHT
+  dht.begin();
+  
   while (!Serial) {
     ; // wait for serial port to connect. Needed for native USB port only
   }
@@ -38,24 +52,24 @@ void loop() {
   // check the network connection once every 10 seconds:
   delay(5000);
 
+  // Leemos la temperatura en grados centígrados (por defecto)
+  float temperatura_c = dht.readTemperature();
+  humedad = analogRead(A0);  //put Sensor insert into soil
+
 if (client.connect(server, 80)>0) {
-     Serial.println("Conexion Establecida con el Servidor");  //Conexion con el servidor
-           Serial.print("Almacenando en Servidor: Dato: "); 
-           Serial.println(numero);
-           client.print("GET http://192.168.0.128/grupo_4_vespertino/SistemaHumedadArduino/conexion.php?var1=");
-           client.print(numero);
-           client.println(" HTTP/1.0");
-           client.println("User-Agent: Arduino 1.0");
-           client.println();
-           numero= numero +1;
-      }
-   else {
-    Serial.println("Error en la Conexion al Servidor");
-    
-  }
-   client.stop();
-   client.flush();
+     Serial.println("Conexion Establecida con el Servidor");                                                  // Si la condición de establecer Conexión con el servidor se cumple, muestra el mensaje.
+     client.print("GET http://192.168.0.128/Grupo_4_vespertino/SistemaHumedadArduino/conexion.php?temp_c=");      // Enviamos los datos por GET para la primera variable1 en la base de dato
+     client.print(temperatura_c);
+     Serial.println(temperatura_c); // enviamos la variable de arduino
+     //client.print("&temp_f=");                                                                                                    //  variable2 para la base de dato
+     //client.print(temperatura_f);                                                                                              //enviamos la segunda variable de arduino 
+     client.print("&humedad=");                                                                                              // variable3 para la base de dato
+     client.print(humedad);                                                                                                     // enviamos la tercera variable de arduino
+     client.println(" HTTP/1.0");
+     client.println("User-Agent: Arduino 1.0");
+     client.println();
   
+}
 }
 void printWifiData() {
   // print your board's IP address:

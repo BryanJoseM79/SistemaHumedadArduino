@@ -92,7 +92,7 @@ include("conexion.php");
 <!-- FIN DE BIENVENIDA AL ADMINISTRADOR + BOTON DE REPORTE -->
 
 <!-- Comienzo de estadisticas abajo del texto de bienvenida al administrador-->
-              <section class="bg-mix">
+            <!-- <section class="bg-mix">
                   
                               <div class="col-lg-3 stat my-3 d-flex">
                                 <div class="mx-auto">
@@ -131,7 +131,7 @@ include("conexion.php");
                         </div>
                     </div>
                   </div>
-              </section>
+              </section>-->
             
 <!-- FIN DE ESTADISTICAS -->
 <section>
@@ -144,12 +144,14 @@ include("conexion.php");
           <th scope="col">Fecha</th>
           <th scope="col">Hora</th>
           <th scope="col">var1</th>
+          <th scope="col">Temperatura</th>
+          <th scope="col">Humedad</th>
          
         </tr>
 
         <?php
-         $query = mysqli_query($conexion,"SELECT d.id, d.fecha, d.hora, d.var1
-         FROM `datos` AS d");
+         $query = mysqli_query($conexion,"SELECT d.id, d.fecha, d.hora, d.var1, d.var2
+         FROM `datos` AS d ORDER BY d.id DESC");
         
         $result = mysqli_num_rows($query);
         if($result > 0){
@@ -165,6 +167,8 @@ include("conexion.php");
           <td><?php echo $data["fecha"]; ?></td>
           <td><?php echo $data["hora"]; ?></td>
           <td><?php echo $data["var1"]; ?></td>
+          <td><?php echo $data["var2"]; ?></td>
+          
           
       </tr>
 
