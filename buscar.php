@@ -44,19 +44,26 @@ include("conexion.php");
 <!-- FINAL DEL TABLERO IZQUIERDO -->
 
 <!-- Comienzo del navbar superior -->
+                <?php
+                 //-------------busqueda-----------
+                 //hacer busqueda con letras en minusculas
+                 $busqueda = strtolower($_REQUEST['busqueda']);
+                 //si no existe busqueda volver a admin.php
+                 if(empty($busqueda)){
+                   header("location: index.php");
+                   mysqli_close($conexion);
+                 }
+                ?>
     <div class="w-100">
         <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">        
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>
-
+           
             <div class="col-md-9 ">
-            </div>
-
-<div class="col-md-9 ">
-<form action="buscar.php" method="GET" class="derecha-buscar">
-    <input type="text" name="busqueda" id="busquedda" placeholder="Buscar">
-    <input type="submit" value="Buscar" class="">
+<form action="buscar.php" method="GET" class="">
+   <input type="text" name="busqueda" id="busqueda" placeholder="Buscar" value="<?php echo $busqueda; ?>">
+   <input type="submit" value="Buscar" class="">
 </form>
 
 
@@ -92,6 +99,7 @@ include("conexion.php");
                         </div>
                     </div>
                 </div>
+                
               </section>
 <!-- FIN DE BIENVENIDA AL ADMINISTRADOR + BOTON DE REPORTE -->
 
@@ -151,37 +159,48 @@ include("conexion.php");
           <th scope="col">Humedad</th>
          
         </tr>
-
-        <?php
-        //-------------paginador-----------
-                      //calcular cuantos registros activos tenemos en nuestra bd
-                      $sql_registro = mysqli_query($conexion,"SELECT COUNT(*) AS total_registro FROM `datos`");
-
-                      $result_registro = mysqli_fetch_array($sql_registro);
-                      $total_registro = $result_registro['total_registro'];
-
-                      $por_pagina = 5;
-
-                      if(empty($_GET['pagina'])){
-                        $pagina = 1;
-                      }else{
-                        $pagina = $_GET['pagina'];
-                      }
-                      $desde = ($pagina-1) * $por_pagina;
-                      $total_paginas = ceil($total_registro / $por_pagina);
-
-
-                       $query = mysqli_query($conexion,"SELECT d.id, d.fecha, d.hora, d.var1, d.var2 
-                       FROM `datos` AS d  
-                       ORDER BY d.id ASC LIMIT $desde,$por_pagina");
+                    <?php
                       
-                      $result = mysqli_num_rows($query);
-                      if($result > 0){
+                      //llamar la variable busqueda
+                      $busqueda=$_GET['busqueda'];
+                       //sentencia sql para buscar a traves de datos
+                       $sql_registro = mysqli_query($conexion,"SELECT COUNT(*) AS total_registro FROM `datos` 
+                       WHERE( id LIKE '%$busqueda%' OR
+                        fecha    LIKE '%$busqueda%' OR 
+                        hora     LIKE '%$busqueda%' OR 
+                        var1     LIKE '%$busqueda%' OR 
+                        var2     LIKE '%$busqueda%')");
+//paginador
+$result_registro = mysqli_fetch_array($sql_registro);
+$total_registro = $result_registro['total_registro'];
 
-                        while ($data = mysqli_fetch_array($query)){
+$por_pagina = 5;
+
+if(empty($_GET['pagina'])){
+  $pagina = 1;
+}else{
+  $pagina = $_GET['pagina'];
+}
+$desde = ($pagina-1) * $por_pagina;
+$total_paginas = ceil($total_registro / $por_pagina);
 
 
-                       ?>
+$query = mysqli_query($conexion,"SELECT d.id, d.fecha, d.hora, d.var1, d.var2 
+FROM `datos` AS d
+  WHERE ( d.id LIKE '%$busqueda%' OR
+         d.fecha LIKE '%$busqueda%' OR 
+         d.hora  LIKE '%$busqueda%' OR 
+         d.var1  LIKE '%$busqueda%' OR 
+         d.var2 LIKE '%$busqueda%')
+  ORDER BY d.id ASC LIMIT $desde,$por_pagina");
+        
+        $result = mysqli_num_rows($query);
+        if($result > 0){
+
+          while ($data = mysqli_fetch_array($query)){
+
+
+         ?>
       </thead>
       <tbody>
         <tr>
@@ -199,10 +218,9 @@ include("conexion.php");
   }
   ?>
       </tbody>
-      </tbody>
-                  </table>
-                  <div class="paginador"> 
-                  <ul>
+    </table>
+    <div class="paginador">
+    <ul>
 
                   <?php
                     if($pagina != 1)
@@ -233,23 +251,12 @@ include("conexion.php");
                     <?php } ?>
                   </ul>
                   </div>
-                      </div>
-                  </div>
-                </div>
-            </ul>
-          </div>
         </div>
       </div>
-</div> 
-                </div>
-  
-   
-                </table>
-    </section>
-    
-        </div>
-      </div>
+</section>
 
+          </div>
+    </div>
 <!-- FIN del navbar superior -->
 
 </div>
