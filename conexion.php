@@ -1,5 +1,5 @@
 <?php
-
+error_reporting(0);
 date_default_timezone_set("America/Santiago");
 
 //introducimos variables
@@ -16,11 +16,11 @@ date_default_timezone_set("America/Santiago");
 
 ///hacemos la consulta a la bd
 
-$sql = "INSERT INTO datos (fecha, hora, var1, var2)
+$sql = "INSERT INTO datos (fecha, hora, temp, var2)
 VALUES('".$fecha."',
        '".$hora."',
-       '".$_GET['temp_c']."'
-       '".$_GET['humedad']."'
+       '".$_GET['temp']."',
+       '".$_GET['var2']."'
        )";
 
 //realizamos consulta mas la conexion

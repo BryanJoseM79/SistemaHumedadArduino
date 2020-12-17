@@ -143,14 +143,13 @@ include("conexion.php");
           <th scope="col">ID</th>
           <th scope="col">Fecha</th>
           <th scope="col">Hora</th>
-          <th scope="col">var1</th>
           <th scope="col">Temperatura</th>
           <th scope="col">Humedad</th>
          
         </tr>
 
         <?php
-         $query = mysqli_query($conexion,"SELECT d.id, d.fecha, d.hora, d.var1, d.var2
+         $query = mysqli_query($conexion,"SELECT d.id, d.fecha, d.hora, d.temp, d.var2
          FROM `datos` AS d ORDER BY d.id DESC");
         
         $result = mysqli_num_rows($query);
@@ -166,7 +165,7 @@ include("conexion.php");
           <th scope="row"><?php echo $data["id"]; ?></th>
           <td><?php echo $data["fecha"]; ?></td>
           <td><?php echo $data["hora"]; ?></td>
-          <td><?php echo $data["var1"]; ?></td>
+          <td><?php echo $data["temp"]; ?></td>
           <td><?php echo $data["var2"]; ?></td>
           
           
